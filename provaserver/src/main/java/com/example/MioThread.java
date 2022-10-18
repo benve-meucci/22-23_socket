@@ -18,7 +18,7 @@ public class MioThread extends Thread {
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
             for (;;) {
                 String str = in.readLine();
-                if (str.equals("fine")) {
+                if (str.equals("FINE")) {
                     System.out.println(Thread.currentThread().getName() + " Il client ha chiesto di chiudere la connessione");
                     out.writeBytes("@\n");
                     break;
