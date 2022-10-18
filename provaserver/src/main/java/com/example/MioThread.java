@@ -7,16 +7,28 @@ import java.net.Socket;
 
 public class MioThread extends Thread {
     Socket s;
+
     public MioThread(Socket s) {
         this.s = s;
     }
+
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
-            String str = in.readLine();
-            out.writeBytes(str.toUpperCase() + "\n");
-            s.close();
-        } catch (Exception e) {}
+            for (;;) {
+                String str = in.readLine();
+                if (str.equals("fine")) {
+                    System.out.println(Thread.currentThread().getName() + " Il client ha chiesto di chiudere la connessione");
+                    out.writeBytes("@\n");
+                    break;
+                } else {
+                    System.out.println(Thread.currentThread().getName() + ": ricevuto " + str);
+                    out.writeBytes(str.toUpperCase() + "\n");
+                }
+            }
+        } catch (Exception e) {
+        }
+        System.out.println(Thread.currentThread().getName() + ": sta terminando");
     }
 }

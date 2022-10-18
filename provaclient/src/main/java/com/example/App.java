@@ -11,13 +11,19 @@ public class App {
         // buffer input dal socket
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
-        //buffer input da tastiera
+        // buffer input da tastiera
         BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Inserisci il messaggio:");
-        String stringaUtente = tastiera.readLine();
-        out.writeBytes(stringaUtente + "\n");
-        String str = in.readLine();
-        System.out.println("Server ha inviato: " + str);
-        s.close();
+        for (;;) {
+            System.out.println("Inserisci il messaggio:");
+            String stringaUtente = tastiera.readLine();
+            out.writeBytes(stringaUtente + "\n");
+            String str = in.readLine();
+            if(str.equals("@")){
+                s.close();
+                System.out.println("Server ha chiuso la connessione");
+                break;
+            }
+            System.out.println("Server ha inviato: " + str);
+        }
     }
 }
