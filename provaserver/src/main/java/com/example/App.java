@@ -12,10 +12,11 @@ public class App {
         Socket s = ss.accept();
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
-        String str = in.readLine();
-        out.writeBytes(str.toUpperCase() + "\n");
-        s.close();
-        ss.close();
-
+        do{
+            String str = in.readLine();
+            out.writeBytes(str.toUpperCase() + "\n");
+        }while(true);
+        //s.close();
+        //ss.close();
     }
 }
