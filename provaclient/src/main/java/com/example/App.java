@@ -17,12 +17,11 @@ public class App {
             System.out.println("Inserisci il messaggio:");
             String stringaUtente = tastiera.readLine();
             out.writeBytes(stringaUtente + "\n");
-            String str = in.readLine();
-            if(str.equals("@")){
-                s.close();
-                System.out.println("Server ha chiuso la connessione");
+            if(stringaUtente.equals("FINE")){
+                System.out.println("Chiusura della connessione");
                 break;
             }
+            String str = in.readLine();
             System.out.println("Server ha inviato: " + str);
         }
     }

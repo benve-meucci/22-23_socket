@@ -20,7 +20,7 @@ public class MioThread extends Thread {
                 String str = in.readLine();
                 if (str.equals("FINE")) {
                     System.out.println(Thread.currentThread().getName() + " Il client ha chiesto di chiudere la connessione");
-                    out.writeBytes("@\n");
+                    s.close();
                     break;
                 } else {
                     System.out.println(Thread.currentThread().getName() + ": ricevuto " + str);
