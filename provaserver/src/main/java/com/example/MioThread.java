@@ -19,16 +19,21 @@ public class MioThread extends Thread {
             for (;;) {
                 String str = in.readLine();
                 if (str.equals("FINE")) {
-                    System.out.println(Thread.currentThread().getName() + " Il client ha chiesto di chiudere la connessione");
+                    System.out.println(whoami() + "Il client ha chiesto di chiudere la connessione");
                     s.close();
                     break;
                 } else {
-                    System.out.println(Thread.currentThread().getName() + ": ricevuto " + str);
+                    System.out.println(whoami() + "ricevuto " + str);
                     out.writeBytes(str.toUpperCase() + "\n");
                 }
             }
         } catch (Exception e) {
+            System.out.println(whoami() + e.getMessage());
         }
-        System.out.println(Thread.currentThread().getName() + ": sta terminando");
+        System.out.println(whoami() + "sta terminando");
+    }
+
+    private String whoami(){
+        return Thread.currentThread().getName() + ": "; 
     }
 }
